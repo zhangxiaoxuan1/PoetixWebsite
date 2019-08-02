@@ -1,0 +1,37 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'poetix/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'poetix/index.css' %}">
+
+<div class="wrapper">
+  <h1 class="title">
+    Limerick Generator
+    <span class="subtitle">Automatic limerick generation with machine learning</span>
+  </h1>
+  <div class="content">
+    <div class="formContainer">
+      <div class="formHeader">
+        Please enter a keyword below to generate a limerick about it.
+      </div>
+      <form action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="poemContainer">
+      {% if poem %}
+        <div class="poemTitle"><b>{{title}}</b></div>
+        {% for line in poem%}
+          <div>{{line}}</div>
+        {% endfor %}
+      {% else %}
+        <div>
+          <div>
+            <img class="poemImage" src="{% static "poetix/book.svg" %}" alt="Poem" width="100"/>
+          </div>
+          Your poem will show here. It could take a while to generate a poem.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
